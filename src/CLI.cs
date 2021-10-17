@@ -18,7 +18,6 @@ namespace Converter
             {
             new Argument<string>("input", "Input file."),
             new Option<string>(new[] {"--output", "-o"}, "Output file name. Defaults to input name with xml extension."),
-            new Option(new[] {"--verbose", "-v"}, "Detailied ouput."),
             new Option(new[] {"--force", "-f"}, "Write output even if files already exists.")
             };
 
@@ -47,6 +46,8 @@ namespace Converter
             }
 
             Converter.LineBasedToXML(input, output);
+
+            Console.WriteLine(input + " => " + output);
         }
     }
 }

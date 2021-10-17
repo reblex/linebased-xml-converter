@@ -12,9 +12,7 @@ namespace Converter
         /// <param name="inputFile">Input file.</param>
         /// <param name="outputFile">Output file.</param>
         public static void LineBasedToXML(string inputFile, string outputFile)
-        {
-            Console.WriteLine(inputFile + " => " + outputFile);
-            
+        {   
             // Load from file into objects
             List<Person> people = LoadLineBased(inputFile);
 
@@ -42,16 +40,29 @@ namespace Converter
             Person person = new Person();  
             int familyMemberIndex = -1;                         // -1 = No family members as of yet.
             int lineCount = 0;
+            char previousLineType = '-';
 
             foreach (string line in System.IO.File.ReadLines(inputFile))
             {
+                // Empty Line error
+                if (line.Length == 0)
+                {
+                    Console.WriteLine("Incorrect file structure, empty line, on line " + (lineCount + 1));
+                    Environment.Exit(1);
+                }
+                
                 string[] segments = line.Split('|');            // "P|Simon|Wahlström" => [P, Simon, Wahlström]
                 char lineType = segments[0].ToCharArray()[0];   // Type of line (P/T/A/F) as defined by first char on line
 
                 // Ensure lineType is OK
                 if (Array.IndexOf(acceptedLineTypes, lineType) == -1)
                 {
-                    Console.WriteLine("Incorrect file structure \"" + lineType + "\" at: ", line);
+                    Console.WriteLine("Incorrect file structure on line " + (lineCount + 1) + ": " + line.ToString());
+                    Environment.Exit(1);
+                }
+                else if (lineType == previousLineType)
+                {
+                    Console.WriteLine("Incorrect file structure. Line type same as previous on line " + (lineCount + 1) + ": " + line.ToString());
                     Environment.Exit(1);
                 }
    
@@ -87,7 +98,15 @@ namespace Converter
                         break;                    
                 }
 
+                previousLineType = lineType;
                 lineCount++;
+            }
+
+            // Ensure file had lines
+            if (lineCount == 0)
+            {
+                Console.WriteLine(inputFile + " was empty. No output generated.");
+                Environment.Exit(1);
             }
 
             // Add last person
