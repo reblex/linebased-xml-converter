@@ -15,16 +15,17 @@ namespace Converter
             {
             new Argument<string>("input", "Input file."),
             new Option<string>(new[] {"--output", "-o"}, "Output file name. Defaults to input name with xml extension."),
-            new Option(new[] {"--verbose", "-v"}, "Detailied ouput.")
+            new Option(new[] {"--verbose", "-v"}, "Detailied ouput."),
+            new Option(new[] {"--force", "-f"}, "Write output even if files already exists.")
             };
 
-            cmd.Handler = CommandHandler.Create<string, string>(HandleConversion);
+            cmd.Handler = CommandHandler.Create<string, string, bool, bool>(HandleConversion);
 
             return cmd.Invoke(args);
         }
 
         // CLI Handlers
-        private static void HandleConversion(string input, string output)
+        private static void HandleConversion(string input, string output, bool verbose, bool force)
         {
             // Can't find input file
             if (!File.Exists(input))
@@ -36,7 +37,7 @@ namespace Converter
             output = output != "" ? output : Path.ChangeExtension(input, ".xml");         
 
             // Already existing output file
-            if (File.Exists(output))
+            if (File.Exists(output) && !force)
             {
                 Console.WriteLine("Output name " + output + " already exists. Please enter alternative output name using the -o option.");
                 return;
