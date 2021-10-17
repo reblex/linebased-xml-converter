@@ -3,8 +3,11 @@
 Converts data of type:
 
 P|förnamn|efternamn
+
 T|mobilnummer|fastnätsnummer
+
 A|gata|stad|postnummer
+
 F|namn|födelseår
 
 ... to XML.
