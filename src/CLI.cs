@@ -16,9 +16,9 @@ namespace Converter
         {
             var cmd = new RootCommand
             {
-            new Argument<string>("input", "Input file."),
-            new Option<string>(new[] {"--output", "-o"}, "Output file name. Defaults to input name with xml extension."),
-            new Option(new[] {"--force", "-f"}, "Write output even if files already exists.")
+            new Argument<string>("input", "Input file path."),
+            new Option<string>(new[] {"--output", "-o"}, "Output file path. Defaults to ./<input-name>.xml"),
+            new Option(new[] {"--force", "-f"}, "Write output even if the file already exists.")
             };
 
             cmd.Handler = CommandHandler.Create<string, string, bool, bool>(HandleConversion);
