@@ -13,6 +13,8 @@ namespace Converter
         /// <param name="outputFile">Output file.</param>
         public static void LineBasedToXML(string inputFile, string outputFile)
         {
+            Console.WriteLine(inputFile + " => " + outputFile);
+            
             // Load from file into objects
             List<Person> people = LoadLineBased(inputFile);
 

@@ -37,7 +37,7 @@ namespace Converter
                 return;
             }
 
-            output = output != "" ? output : Path.ChangeExtension(input, ".xml");         
+            output = output != "" ? output : Path.GetFileName(Path.ChangeExtension(input, ".xml"));
 
             // Already existing output file
             if (File.Exists(output) && !force)
