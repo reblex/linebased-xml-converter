@@ -1,6 +1,9 @@
 .vscode/*
 bin/*
 obj/*
+
 *.txt
+!example-input/*
+
 *.xml
 !doc/*
