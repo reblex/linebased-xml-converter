@@ -6,6 +6,11 @@ namespace Converter
 {
     class Converter
     {
+        /// <summary>
+        /// Convert LineBased stored information containing people and their families contact information to XML.
+        /// </summary>
+        /// <param name="inputFile">Input file.</param>
+        /// <param name="outputFile">Output file.</param>
         public static void LineBasedToXML(string inputFile, string outputFile)
         {
             // Load from file into objects
@@ -23,6 +28,11 @@ namespace Converter
             xml.Save(outputFile);
         }
 
+        /// <summary>
+        /// Load from LineBased frile into Person() object structure.
+        /// </summary>
+        /// <param name="inputFile">Input file.</param>
+        /// <returns>List of Person() objects</returns>
         private static List<Person> LoadLineBased(string inputFile)
         {
             char[] acceptedLineTypes = { 'P', 'T', 'A', 'F' };

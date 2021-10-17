@@ -7,6 +7,9 @@ using System.CommandLine.Invocation;
 
 namespace Converter
 {
+    /// <summary>
+    /// Command Line Interface for Converter app.
+    /// </summary>
     class CLI
     {
         public static int Main(string[] args)

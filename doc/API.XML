@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>softhouse</name>
+    </assembly>
+    <members>
+        <member name="T:Converter.CLI">
+            <summary>
+            Command Line Interface for Converter app.
+            </summary>
+        </member>
+        <member name="M:Converter.Converter.LineBasedToXML(System.String,System.String)">
+            <summary>
+            Convert LineBased stored information containing people and their families contact information to XML.
+            </summary>
+            <param name="inputFile">Input file.</param>
+            <param name="outputFile">Output file.</param>
+        </member>
+        <member name="M:Converter.Converter.LoadLineBased(System.String)">
+            <summary>
+            Load from LineBased frile into Person() object structure.
+            </summary>
+            <param name="inputFile">Input file.</param>
+            <returns>List of Person() objects</returns>
+        </member>
+        <member name="T:Converter.Person">
+            <summary>
+            Person Class used as middle ground for converting between stored data types. 
+            Currently LineBased to XML.
+            </summary>
+        </member>
+        <member name="M:Converter.Person.#ctor">
+            <summary>
+            Person() Constructor
+            </summary>
+        </member>
+        <member name="M:Converter.Person.AddNames(System.String[])">
+            <summary>
+            Add first- and surname member variables.
+            </summary>
+            <param name="data">First- and surname as array[2]</param>
+        </member>
+        <member name="M:Converter.Person.AddPhone(System.String[],System.Int32)">
+            <summary>
+            Add phone numbers to Person or related family member object.
+            </summary>
+            <param name="data">Mobile and Home numbers as array[2]</param>
+            <param name="familyIndex">Optional: If given, indexes of 0 or higher adds phone numbers to indexed family member</param>
+        </member>
+        <member name="M:Converter.Person.AddAddress(System.String[],System.Int32)">
+            <summary>
+            Add address to Person or related family member object.
+            </summary>
+            <param name="data">Street, City, and Zip, as array[3]</param>
+            <param name="familyIndex">Optional: If given, indexes of 0 or higher adds address information to indexed family member</param>
+        </member>
+        <member name="M:Converter.Person.AddFamilyMember(System.String[])">
+            <summary>
+            Create a family member object associated with this person.
+            </summary>
+            <param name="data">Name and birth year, as array[2]</param>
+        </member>
+        <member name="M:Converter.Person.ToXML">
+            <summary>
+            Generate XML structure from Person()-object including family member info.
+            </summary>
+            <returns>XElement object</returns>
+        </member>
+    </members>
+</doc>
