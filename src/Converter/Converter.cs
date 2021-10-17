@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Linq;
 using System.Collections.Generic;
 
 namespace Converter
@@ -7,11 +8,19 @@ namespace Converter
     {
         public static void LineBasedToXML(string inputFile, string outputFile)
         {
+            // Load from file into objects
             List<Person> people = LoadLineBased(inputFile);
 
             // Add all together as XML
+            XElement xml = new XElement("people");
+            foreach (Person person in people)
+            {
+                XElement personXML = person.ToXML();
+                xml.Add(personXML);
+            }
 
             // Save to File
+            xml.Save(outputFile);
         }
 
         private static List<Person> LoadLineBased(string inputFile)
@@ -73,11 +82,6 @@ namespace Converter
             people.Add(person);
 
             return people;
-        }
-
-        private static void WriteToFile(string data, string outputFile)
-        {
-            return;
         }
     }
 }

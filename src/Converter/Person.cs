@@ -1,4 +1,3 @@
-using System;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
@@ -83,6 +82,33 @@ namespace Converter
             family.born = data.ElementAtOrDefault(1);
 
             familyMembers.Add(family);
+        }
+
+        public XElement ToXML()
+        {
+            XElement person = new XElement("person",
+                new XElement("firstname", firstname),
+                new XElement("lastname", surname),
+                new XElement("address",
+                    new XElement("street", address.street),
+                    new XElement("city", address.city),
+                    new XElement("zip", address.zip)),
+                new XElement("phone",
+                    new XElement("mobile", phone.mobile),
+                    new XElement("home", phone.home)),
+                familyMembers.Select(family =>
+                    new XElement("family",
+                        new XElement("name", family.name),
+                        new XElement("born", family.born),
+                        new XElement("address",
+                            new XElement("street", family.address.street),
+                            new XElement("city", family.address.city),
+                            new XElement("zip", family.address.zip)),
+                        new XElement("phone",
+                            new XElement("mobile", family.phone.mobile),
+                            new XElement("home", family.phone.home)))));
+
+            return person;
         }
     }
 }
